@@ -9,64 +9,64 @@ let Translator = require('../components/translator.js');
 
 suite('Functional Tests', () => {
 
-    test('Translation with text and locale fields: POST request to /api/translate', (done) => {
-        chai
-            .request(server)
-            .post('/api/translate')
-            .send({ text: '', locale: '' })
-            .end((err, res) => {
-                done()
-            })
-    })
+    // test('Translation with text and locale fields: POST request to /api/translate', (done) => {
+    //     chai
+    //         .request(server)
+    //         .post('/api/translate')
+    //         .send({ text: '', locale: '' })
+    //         .end((err, res) => {
+    //             done()
+    //         })
+    // })
 
-    test('Translation with text and invalid locale field: POST request to /api/translate', (done) => {
-        chai
-            .request(server)
-            .post('/api/translate')
-            .send({ text: '', locale: '' })
-            .end((err, res) => {
-                done()
-            })
-    })
+    // test('Translation with text and invalid locale field: POST request to /api/translate', (done) => {
+    //     chai
+    //         .request(server)
+    //         .post('/api/translate')
+    //         .send({ text: '', locale: '' })
+    //         .end((err, res) => {
+    //             done()
+    //         })
+    // })
 
-    test('Translation with missing text field: POST request to /api/translate', (done) => {
-        chai
-            .request(server)
-            .post('/api/translate')
-            .send({ text: '', locale: '' })
-            .end((err, res) => {
-                done()
-            })
-    })
+    // test('Translation with missing text field: POST request to /api/translate', (done) => {
+    //     chai
+    //         .request(server)
+    //         .post('/api/translate')
+    //         .send({ text: '', locale: '' })
+    //         .end((err, res) => {
+    //             done()
+    //         })
+    // })
 
-    test('Translation with missing locale field: POST request to /api/translate', (done) => {
-        chai
-            .request(server)
-            .post('/api/translate')
-            .send({ text: '', locale: '' })
-            .end((err, res) => {
-                done()
-            })
-    })
+    // test('Translation with missing locale field: POST request to /api/translate', (done) => {
+    //     chai
+    //         .request(server)
+    //         .post('/api/translate')
+    //         .send({ text: '', locale: '' })
+    //         .end((err, res) => {
+    //             done()
+    //         })
+    // })
 
-    test('Translation with empty text: POST request to /api/translate', (done) => {
-        chai
-            .request(server)
-            .post('/api/translate')
-            .send({ text: '', locale: '' })
-            .end((err, res) => {
-                done()
-            })
-    })
+    // test('Translation with empty text: POST request to /api/translate', (done) => {
+    //     chai
+    //         .request(server)
+    //         .post('/api/translate')
+    //         .send({ text: '', locale: '' })
+    //         .end((err, res) => {
+    //             done()
+    //         })
+    // })
 
-    test('Translation with text that needs no translation: POST request to /api/translate', (done) => {
-        chai
-            .request(server)
-            .post('/api/translate')
-            .send({ text: '', locale: '' })
-            .end((err, res) => {
-                done()
-            })
-    })
+    // test('Translation with text that needs no translation: POST request to /api/translate', (done) => {
+    //     chai
+    //         .request(server)
+    //         .post('/api/translate')
+    //         .send({ text: '', locale: '' })
+    //         .end((err, res) => {
+    //             done()
+    //         })
+    // })
 
 });

@@ -6,44 +6,44 @@ const translator = new Translator()
 
 suite('Unit Tests', () => {
 
-    // test('Translate Mangoes are my favorite fruit. to British English', () => {
-    //     assert.equal(
-    //         translator.translate("Mangoes are my favorite fruit.", 'american-to-british'),
-    //         "Mangoes are my favourite fruit."
-    //     )
-    // })
-
-    // test('Translate I ate yogurt for breakfast. to British English', () => {
-    //     assert.equal(
-    //         translator.translate("I ate yogurt for breakfast.", 'american-to-british'),
-    //         "I ate yoghurt for breakfast."
-    //     )
-    // })
-
-    test('Translate We had a party at my friend\'s condo. to British English', () => {
+    test('Translate Mangoes are my favorite fruit. to British English', () => {
         assert.equal(
-            // translator.translate("We had a party at my friend\'s condo.", 'american-to-british'),
-            // "We had a party at my friend\'s flat."
-            // translator.translate("I ate yogurt for breakfast.", 'american-to-british'),
-            // "I ate yoghurt for breakfast."
-            translator.translate("yogurt.", 'american-to-british'),
-            "yoghurt."
+            translator.translate("Mangoes are my favorite fruit.", 'american-to-british'),
+            "Mangoes are my favourite fruit."
         )
     })
 
-    // test('Translate Can you toss this in the trashcan for me? to British English', () => {
-    //     assert.equal(
-    //         translator.translate('', ''),
-    //         ''
-    //     )
-    // })
+    test('Translate I ate yogurt for breakfast. to British English', () => {
+        assert.equal(
+            translator.translate("I ate yogurt for breakfast.", 'american-to-british'),
+            "I ate yoghurt for breakfast."
+        )
+    })
 
-    // test('Translate The parking lot was full. to British English', () => {
-    //     assert.equal(
-    //         translator.translate('', ''),
-    //         ''
-    //     )
-    // })
+    test('Translate We had a party at my friend\'s condo. to British English', () => {
+        assert.equal(
+            translator.translate("We had a party at my friend\'s condo.", 'american-to-british'),
+            "We had a party at my friend\'s flat."
+        )
+    })
+
+    test('Translate Can you toss this in the trashcan for me? to British English', () => {
+        assert.equal(
+            translator.translate('Can you toss this in the trashcan for me?', 'american-to-british'),
+            'Can you toss this in the bin for me?'
+        )
+    })
+
+    // fixed punctuation bug
+    // 1 unit test
+    // Compare all consecutive combinations
+    // Maintain capitalization 
+    test('Translate The parking lot was full. to British English', () => {
+        assert.equal(
+            translator.translate('The parking lot was full.', 'american-to-british'),
+            'The car park was full.'
+        )
+    })
 
     // test('Translate Like a high tech Rube Goldberg machine. to British English', () => {
     //     assert.equal(

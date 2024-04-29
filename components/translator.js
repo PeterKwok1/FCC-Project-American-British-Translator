@@ -8,30 +8,38 @@ class Translator {
     // wrap translated word in a span with class 'highlight'
     // index takes inner html or an error obj 
     translate(string, direction) {
+
         // store punctuation 
         let regex = /[.?!]$/
-        let punctuation = regex.test(string)[0] ? string.match(regex) : null
-        string.replace(regex, '')
+        let punctuation = regex.test(string) ? string.match(regex)[0] : null
+        string = string.replace(regex, '')
 
         // set sentence
         const sentence = string.split(' ')
+
         // set key
         const key = this.keyConstructor(direction)
         const keys = Object.keys(key)
+
         // translate
         let translation = []
         for (let word = 0; word < sentence.length; word++) {
-            if (keys.includes(sentence[word])) {
-                translation.push(key[sentence[word]])
-            } else {
-                translation.push(sentence[word])
+            // Compare consecutive combinations
+            // prioritizing phrases
+            for (let phrase = sentence.length; phrase > word; phrase--) {
+                const phraseString = sentence.slice(word, phrase).join(' ')
+                if (keys.includes(phraseString)) {
+                    translation.push(key[phraseString])
+                } else {
+                    translation.push(sentence[word])
+                }
             }
         }
 
         // add punctuation
-        const newString = punctuation ? translation.join(' ') + punctuation
+        const translatedString = punctuation ? translation.join(' ') + punctuation
             : translation.join(' ')
-        return newString
+        return translatedString
     }
 
     keyConstructor(direction) {

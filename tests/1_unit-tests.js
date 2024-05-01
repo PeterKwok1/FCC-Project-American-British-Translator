@@ -34,10 +34,6 @@ suite('Unit Tests', () => {
         )
     })
 
-    // fixed punctuation bug
-    // 1 unit test
-    // Compare all consecutive combinations
-    // Maintain capitalization 
     test('Translate The parking lot was full. to British English', () => {
         assert.equal(
             translator.translate('The parking lot was full.', 'american-to-british'),
@@ -45,26 +41,26 @@ suite('Unit Tests', () => {
         )
     })
 
-    // test('Translate Like a high tech Rube Goldberg machine. to British English', () => {
-    //     assert.equal(
-    //         translator.translate('', ''),
-    //         ''
-    //     )
-    // })
+    test('Translate Like a high tech Rube Goldberg machine. to British English', () => {
+        assert.equal(
+            translator.translate('Like a high tech Rube Goldberg machine.', 'american-to-british'),
+            'Like a high tech Heath Robinson device.'
+        )
+    })
 
-    // test('Translate To play hooky means to skip class or work. to British English', () => {
-    //     assert.equal(
-    //         translator.translate('', ''),
-    //         ''
-    //     )
-    // })
+    test('Translate To play hooky means to skip class or work. to British English', () => {
+        assert.equal(
+            translator.translate('To play hooky means to skip class or work.', 'american-to-british'),
+            'To bunk off means to skip class or work.'
+        )
+    })
 
-    // test('Translate No Mr. Bond, I expect you to die. to British English', () => {
-    //     assert.equal(
-    //         translator.translate('', ''),
-    //         ''
-    //     )
-    // })
+    test('Translate No Mr. Bond, I expect you to die. to British English', () => {
+        assert.equal(
+            translator.translate('No Mr. Bond, I expect you to die.', 'american-to-british'),
+            'No Mr Bond, I expect you to die.'
+        )
+    })
 
     // test('Translate Dr. Grosh will see you now. to British English', () => {
     //     assert.equal(

@@ -4,7 +4,6 @@ const americanToBritishTitles = require("./american-to-british-titles.js")
 const britishOnly = require('./british-only.js')
 
 class Translator {
-    // deal with period
     // wrap translated word in a span with class 'highlight'
     // index takes inner html or an error obj 
     translate(string, direction) {
@@ -25,15 +24,21 @@ class Translator {
         let translation = []
         for (let word = 0; word < sentence.length; word++) {
             // Compare consecutive combinations
-            // prioritizing phrases
+            let answer
             for (let phrase = sentence.length; phrase > word; phrase--) {
-                const phraseString = sentence.slice(word, phrase).join(' ')
+                const phraseString = sentence.slice(word, phrase).join(' ').toLowerCase()
                 if (keys.includes(phraseString)) {
-                    translation.push(key[phraseString])
-                } else {
-                    translation.push(sentence[word])
+                    answer = key[phraseString]
+                    // skip rest of phrase
+                    word += (phrase - word - 1)
+                    break
                 }
             }
+            if (!answer) {
+                answer = sentence[word]
+            }
+            translation.push(answer)
+            // console.log(translation)
         }
 
         // add punctuation

@@ -62,19 +62,19 @@ suite('Unit Tests', () => {
         )
     })
 
-    // test('Translate Dr. Grosh will see you now. to British English', () => {
-    //     assert.equal(
-    //         translator.translate('', ''),
-    //         ''
-    //     )
-    // })
+    test('Translate Dr. Grosh will see you now. to British English', () => {
+        assert.equal(
+            translator.translate('Dr. Grosh will see you now.', 'american-to-british'),
+            'Dr Grosh will see you now.'
+        )
+    })
 
-    // test('Translate Lunch is at 12:15 today. to British English', () => {
-    //     assert.equal(
-    //         translator.translate('', ''),
-    //         ''
-    //     )
-    // })
+    test('Translate Lunch is at 12:15 today. to British English', () => {
+        assert.equal(
+            translator.translate('Lunch is at 12:15 today.', 'american-to-british'),
+            'Lunch is at 12.15 today.'
+        )
+    })
 
     // test('Translate We watched the footie match for a while. to American English', () => {
     //     assert.equal(

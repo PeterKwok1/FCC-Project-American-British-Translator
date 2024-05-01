@@ -41,9 +41,13 @@ class Translator {
             // console.log(translation)
         }
 
+        // translate time 
+        translation = this.formatTime(translation, direction)
+
         // add punctuation
         const translatedString = punctuation ? translation.join(' ') + punctuation
             : translation.join(' ')
+
         return translatedString
     }
 
@@ -52,11 +56,38 @@ class Translator {
             return {
                 ...americanOnly,
                 ...americanToBritishSpelling,
-                ...americanToBritishTitles
+                ...this.capitalizeValues(americanToBritishTitles)
             }
         } else if (direction === 'british-to-american') {
-
+            // lowercase keys
         }
+    }
+
+    capitalizeValues(key) {
+        const keys = Object.keys(key)
+        for (let i = 0; i < keys.length; i++) {
+            const firstLetter = key[keys[i]].charAt(0)
+            const firstLetterCap = firstLetter.toUpperCase()
+            const remainingLetters = key[keys[i]].slice(1)
+            key[keys[i]] = firstLetterCap + remainingLetters
+        }
+        return key
+    }
+
+    formatTime(sentence, direction) {
+        let separator
+        let translation
+        if (direction === 'american-to-british') {
+            separator = ':'
+            translation = '.'
+        } else if (direction === 'british-to-american') {
+            separator = '.'
+            translation = ':'
+        }
+        for (let word = 0; word < sentence.length; word++) {
+            sentence[word] = sentence[word].replace(separator, translation)
+        }
+        return sentence
     }
 }
 

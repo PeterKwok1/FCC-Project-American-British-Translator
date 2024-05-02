@@ -59,7 +59,22 @@ class Translator {
                 ...this.capitalizeValues(americanToBritishTitles)
             }
         } else if (direction === 'british-to-american') {
-            // lowercase keys
+            // reverse key
+            // js uses pass by reference so altering the obj here alters it's reference 
+            // lowercase keys to fix capitalization after reversal
+            let britishToAmericanSpelling = {}
+            Object.keys(americanToBritishSpelling).map((e) => {
+                britishToAmericanSpelling[americanToBritishSpelling[e]] = e
+            })
+            let britishToAmericanTitles = {}
+            Object.keys(americanToBritishTitles).map((e) => {
+                britishToAmericanTitles[americanToBritishTitles[e].toLowerCase()] = e
+            })
+            return {
+                ...britishOnly,
+                ...britishToAmericanSpelling,
+                ...this.capitalizeValues(britishToAmericanTitles)
+            }
         }
     }
 
@@ -75,17 +90,19 @@ class Translator {
     }
 
     formatTime(sentence, direction) {
-        let separator
+        let format
         let translation
         if (direction === 'american-to-british') {
-            separator = ':'
+            format = /(\d+):(\d+)/g
             translation = '.'
         } else if (direction === 'british-to-american') {
-            separator = '.'
+            format = /(\d+).(\d+)/g
             translation = ':'
         }
         for (let word = 0; word < sentence.length; word++) {
-            sentence[word] = sentence[word].replace(separator, translation)
+            sentence[word] = sentence[word].replace(format, (match, p1, p2) => {
+                return p1 + translation + p2
+            })
         }
         return sentence
     }

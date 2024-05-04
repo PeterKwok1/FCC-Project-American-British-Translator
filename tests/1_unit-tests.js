@@ -132,26 +132,26 @@ suite('Unit Tests', () => {
         )
     })
 
-    // test('Translate Prof Joyner of King\'s College, London. to American English', () => {
-    //     assert.equal(
-    //         translator.translate('', 'british-to-american'),
-    //         ''
-    //     )
-    // })
+    test('Translate Prof Joyner of King\'s College, London. to American English', () => {
+        assert.equal(
+            translator.translate('Prof Joyner of King\'s College, London.', 'british-to-american'),
+            'Prof. Joyner of King\'s College, London.'
+        )
+    })
 
-    // test('Translate Tea time is usually around 4 or 4.30. to American English', () => {
-    //     assert.equal(
-    //         translator.translate('', 'british-to-american'),
-    //         ''
-    //     )
-    // })
+    test('Translate Tea time is usually around 4 or 4.30. to American English', () => {
+        assert.equal(
+            translator.translate('Tea time is usually around 4 or 4.30.', 'british-to-american'),
+            'Tea time is usually around 4 or 4:30.'
+        )
+    })
 
-    // test('Highlight translation in Mangoes are my favorite fruit.', () => {
-    //     assert.equal(
-    //         translator.translate('', ''),
-    //         ''
-    //     )
-    // })
+    test('Highlight translation in Mangoes are my favorite fruit.', () => {
+        assert.equal(
+            translator.translate('Mangoes are my favorite fruit.', 'american-to-british'),
+            'Mangoes are my <span class = "highlight">favourite</span> fruit.'
+        )
+    })
 
     // test('Highlight translation in I ate yogurt for breakfast.', () => {
     //     assert.equal(

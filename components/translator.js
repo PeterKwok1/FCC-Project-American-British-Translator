@@ -4,8 +4,6 @@ const americanToBritishTitles = require("./american-to-british-titles.js")
 const britishOnly = require('./british-only.js')
 
 class Translator {
-    // wrap translated word in a span with class 'highlight'
-    // index takes inner html or an error obj 
     translate(string, direction) {
 
         // store punctuation 
@@ -22,6 +20,11 @@ class Translator {
 
         // translate
         let translation = []
+        // store index of translated words to highlight
+        // index takes inner html or an error obj 
+        // considered highlighting differences but that wouldn't account for a translation of different length. 
+        let translated = []
+
         for (let word = 0; word < sentence.length; word++) {
             // Compare consecutive combinations
             let answer
@@ -105,6 +108,14 @@ class Translator {
             })
         }
         return sentence
+    }
+
+    highlight(translationObj) {
+        const { translatedString, translated } = translationObj
+        for (let i = 0; i < translated.length; i++) {
+            translatedString[translated[i]] = '<span class = "highlight">' + translatedString[translated[i]] + '/span'
+        }
+        return
     }
 }
 

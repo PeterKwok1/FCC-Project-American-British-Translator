@@ -20,18 +20,14 @@ class Translator {
 
         // translate
         let translation = []
-        // store index of translated words to highlight
-        // index takes inner html or an error obj 
-        // considered highlighting differences but that wouldn't account for a translation of different length. 
-        let translated = []
-
         for (let word = 0; word < sentence.length; word++) {
             // Compare consecutive combinations
             let answer
             for (let phrase = sentence.length; phrase > word; phrase--) {
                 const phraseString = sentence.slice(word, phrase).join(' ').toLowerCase()
                 if (keys.includes(phraseString)) {
-                    answer = key[phraseString]
+                    // highlight
+                    answer = this.highlight(key[phraseString])
                     // skip rest of phrase
                     word += (phrase - word - 1)
                     break
@@ -104,18 +100,14 @@ class Translator {
         }
         for (let word = 0; word < sentence.length; word++) {
             sentence[word] = sentence[word].replace(format, (match, p1, p2) => {
-                return p1 + translation + p2
+                return this.highlight(p1 + translation + p2)
             })
         }
         return sentence
     }
 
-    highlight(translationObj) {
-        const { translatedString, translated } = translationObj
-        for (let i = 0; i < translated.length; i++) {
-            translatedString[translated[i]] = '<span class = "highlight">' + translatedString[translated[i]] + '/span'
-        }
-        return
+    highlight(string) {
+        return '<span class = "highlight">' + string + '</span>'
     }
 }
 

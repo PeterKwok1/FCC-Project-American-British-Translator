@@ -5,6 +5,6 @@ This is the boilerplate for the American British Translator project. Instruction
 # Tickets
 
 # Artifacts 
-fix: highlight translated time
-feat: 3 unit tests
-update: 2 unit tests
+update: added highlight wrappers to tests
+feat: 1 functional test
+feat: translate route

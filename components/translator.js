@@ -5,14 +5,36 @@ const britishOnly = require('./british-only.js')
 
 class Translator {
     translate(string, direction) {
+        // custom split with exclusions
+        string = string.split(' ')
 
-        // store punctuation 
-        let regex = /[.?!]$/
-        let punctuation = regex.test(string) ? string.match(regex)[0] : null
-        string = string.replace(regex, '')
+        // for each sentence, store punctuation, translate sentence,  
 
+        // // store punctuation 
+        // let regex = /[.?!]$/
+        // let punctuation = regex.test(string) ? string.match(regex)[0] : null
+        // string = string.replace(regex, '')
+
+        // // translate time 
+        // translation = this.translateTime(translation, direction)
+
+        // // add punctuation
+        // const translatedString = punctuation ? translation.join(' ') + punctuation
+        //     : translation.join(' ')
+
+        // return translatedString
+    }
+
+    translateSentence(sentence, direction) {
+        let translation
+        translation = this.translateWords(sentence, direction)
+        translation = this.translateTime(sentence, direction)
+        return translation
+    }
+
+    translateWords(sentence, direction) {
         // set sentence
-        const sentence = string.split(' ')
+        const sentence = sentence.split(' ')
 
         // set key
         const key = this.keyConstructor(direction)
@@ -37,17 +59,10 @@ class Translator {
                 answer = sentence[word]
             }
             translation.push(answer)
-            // console.log(translation)
         }
 
-        // translate time 
-        translation = this.formatTime(translation, direction)
-
-        // add punctuation
-        const translatedString = punctuation ? translation.join(' ') + punctuation
-            : translation.join(' ')
-
-        return translatedString
+        sentence = sentence.join(' ')
+        return sentence
     }
 
     keyConstructor(direction) {
@@ -88,7 +103,9 @@ class Translator {
         return key
     }
 
-    formatTime(sentence, direction) {
+    translateTime(sentence, direction) {
+        let sentence = sentence.split(' ')
+
         let format
         let translation
         if (direction === 'american-to-british') {
@@ -98,11 +115,14 @@ class Translator {
             format = /(\d+).(\d+)/g
             translation = ':'
         }
+
         for (let word = 0; word < sentence.length; word++) {
             sentence[word] = sentence[word].replace(format, (match, p1, p2) => {
                 return this.highlight(p1 + translation + p2)
             })
         }
+
+        sentence = sentence.join(' ')
         return sentence
     }
 

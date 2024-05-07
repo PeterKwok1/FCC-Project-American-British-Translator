@@ -4,37 +4,28 @@ const americanToBritishTitles = require("./american-to-british-titles.js")
 const britishOnly = require('./british-only.js')
 
 class Translator {
-    translate(string, direction) {
-        // custom split with exclusions
-        string = string.split(' ')
+    translate(sentence, direction) {
 
-        // for each sentence, store punctuation, translate sentence,  
+        // store punctuation 
+        let regex = /[.?!]$/
+        let punctuation = regex.test(sentence) ? sentence.match(regex)[0] : null
+        sentence = sentence.replace(regex, '')
 
-        // // store punctuation 
-        // let regex = /[.?!]$/
-        // let punctuation = regex.test(string) ? string.match(regex)[0] : null
-        // string = string.replace(regex, '')
+        // translate 
+        sentence = this.translateWords(sentence, direction)
+        sentence = this.translateTime(sentence, direction)
 
-        // // translate time 
-        // translation = this.translateTime(translation, direction)
+        // add punctuation
+        sentence = punctuation ? sentence + punctuation : sentence
 
-        // // add punctuation
-        // const translatedString = punctuation ? translation.join(' ') + punctuation
-        //     : translation.join(' ')
+        return sentence
 
-        // return translatedString
-    }
-
-    translateSentence(sentence, direction) {
-        let translation
-        translation = this.translateWords(sentence, direction)
-        translation = this.translateTime(sentence, direction)
-        return translation
     }
 
     translateWords(sentence, direction) {
+
         // set sentence
-        const sentence = sentence.split(' ')
+        sentence = sentence.split(' ')
 
         // set key
         const key = this.keyConstructor(direction)
@@ -61,8 +52,8 @@ class Translator {
             translation.push(answer)
         }
 
-        sentence = sentence.join(' ')
-        return sentence
+        translation = translation.join(' ')
+        return translation
     }
 
     keyConstructor(direction) {
@@ -104,30 +95,38 @@ class Translator {
     }
 
     translateTime(sentence, direction) {
-        let sentence = sentence.split(' ')
+        sentence = sentence.split(' ')
 
-        let format
-        let translation
+        // key
+        let key
+        let value
         if (direction === 'american-to-british') {
-            format = /(\d+):(\d+)/g
-            translation = '.'
+            key = /(\d+):(\d+)/g
+            value = '.'
         } else if (direction === 'british-to-american') {
-            format = /(\d+).(\d+)/g
-            translation = ':'
-        }
-
-        for (let word = 0; word < sentence.length; word++) {
-            sentence[word] = sentence[word].replace(format, (match, p1, p2) => {
-                return this.highlight(p1 + translation + p2)
-            })
+            key = /(\d+).(\d+)/g
+            value = ':'
         }
 
         sentence = sentence.join(' ')
-        return sentence
+        const translation = sentence
+            .replace(key, (match, p1, p2) => {
+                return this.highlight(p1 + value + p2)
+            })
+
+        // for (let word = 0; word < sentence.length; word++) {
+        //     sentence[word] = sentence[word]
+        //         .replace(key, (match, p1, p2) => {
+        //             return this.highlight(p1 + value + p2)
+        //         })
+        // }
+
+        return translation
     }
 
     highlight(string) {
-        return '<span class = "highlight">' + string + '</span>'
+        // fcc needs this specific combination of quotes and spaces 
+        return '<span class="highlight">' + string + '</span>'
     }
 }
 

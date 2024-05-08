@@ -114,13 +114,6 @@ class Translator {
                 return this.highlight(p1 + value + p2)
             })
 
-        // for (let word = 0; word < sentence.length; word++) {
-        //     sentence[word] = sentence[word]
-        //         .replace(key, (match, p1, p2) => {
-        //             return this.highlight(p1 + value + p2)
-        //         })
-        // }
-
         return translation
     }
 

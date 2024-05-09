@@ -53,24 +53,26 @@ suite('Functional Tests', () => {
             })
     })
 
-    // test('Translation with empty text: POST request to /api/translate', (done) => {
-    //     chai
-    //         .request(server)
-    //         .post('/api/translate')
-    //         .send({ text: '', locale: '' })
-    //         .end((err, res) => {
-    //             done()
-    //         })
-    // })
+    test('Translation with empty text: POST request to /api/translate', (done) => {
+        chai
+            .request(server)
+            .post('/api/translate')
+            .send({ text: '', locale: 'american-to-british' })
+            .end((err, res) => {
+                assert.equal(res.body.error, 'No text to translate')
+                done()
+            })
+    })
 
-    // test('Translation with text that needs no translation: POST request to /api/translate', (done) => {
-    //     chai
-    //         .request(server)
-    //         .post('/api/translate')
-    //         .send({ text: '', locale: '' })
-    //         .end((err, res) => {
-    //             done()
-    //         })
-    // })
+    test('Translation with text that needs no translation: POST request to /api/translate', (done) => {
+        chai
+            .request(server)
+            .post('/api/translate')
+            .send({ text: 'Mangoes are my favourite fruit', locale: 'american-to-british' })
+            .end((err, res) => {
+                assert.equal(res.body.translation, 'Everything looks good to me!')
+                done()
+            })
+    })
 
 });
